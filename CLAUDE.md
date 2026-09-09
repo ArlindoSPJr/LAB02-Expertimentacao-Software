@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository state
 
-This repository is currently empty of code — it contains only `docs/enunciado.md` (the assignment brief, in Portuguese) and no commits yet. There is no build system, test suite, or source tree to document. Treat this as a greenfield project: the structure below should be created as the work progresses, not assumed to already exist.
+This repository is currently empty of source code — it contains the assignment brief and S01 planning docs under `docs/` (`enunciado.md`, `entendimento-e-planejamento.md`, `issues-planejadas.md`, `ambiente-experimento.md`) and no kata code or scripts yet. There is no build system, test suite, or source tree to document beyond what's fixed in "Fixed environment" below. Treat this as a greenfield project: the structure should be created as the work progresses, not assumed to already exist.
 
 ## What this repository is for
 
@@ -24,6 +24,13 @@ This is coursework for **Laboratório de Experimentação de Software** (Engenha
 - Language choice must match the static-analysis tooling: **Java → CK** for complexity/WMC and **PMD/PMD-CPD** for duplication; if not Java, use an equivalent (e.g. **Radon** for Python: `radon cc` for complexity, `radon mi` for maintainability index; jscpd or similar for duplication).
 - LOC must always be reported alongside complexity/duplication as a control metric (AI-generated code may be more verbose).
 - Statistics: use **median and IQR** for descriptive stats (small N), and the **Wilcoxon signed-rank test** for inferential analysis (paired, within-subject design).
+
+### Fixed environment (already decided — see `docs/ambiente-experimento.md` for full detail)
+- **Kata language: Java** (Maven + JUnit 5) — locks in CK/PMD for RQ3, per the constraint above.
+- **Support scripts (timing, static-metrics collection) are written in Python**, orchestrating the Java toolchain — invoking `mvn test`, CK, and PMD as external processes and consolidating results (time, tests passing, complexity, duplication, LOC) into CSV/JSON for the S03 analysis. This is independent of the kata language.
+- **AI assistant: Claude Code** (CLI/agent), same install/usage across all three members in every "with AI" trial.
+- **IDE: VS Code**, same for both treatments (with and without AI) — no AI autocomplete extension (e.g. Copilot) active in either treatment; Claude Code is the only AI assistance, and only in "with AI" trials.
+- Trials are isolated per `trials/<member>/<kata>/<treatment>/`, each starting from a clean kata template with no carried-over chat history.
 
 ### Expected artifacts by sprint
 - **S01 (Lab02S01)**: Experiment design (hypotheses, dependent/independent variables, treatments, chosen katas, threats to validity) + environment prep (timing script, static-metrics script for CK/PMD or Radon).
