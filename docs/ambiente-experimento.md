@@ -9,6 +9,9 @@ Essas decisões são vinculantes para todos os trials da S02: mudar linguagem, I
 - **Linguagem das katas: Java.** Escolhida para habilitar diretamente as ferramentas de métricas estáticas citadas em primeiro lugar no enunciado (RQ3): **CK** (complexidade ciclomática / WMC) e **PMD / PMD-CPD** (duplicação de código).
 - **Versão do JDK: 21 (LTS)**, fixada via imagem Docker (seção 1.1) — não depende da instalação individual de cada integrante.
 - **Build/test runner:** Maven 3.9.9, com JUnit 5.10 para os testes de aceitação de cada kata (ver `pom.xml` na raiz). Usar o mesmo `pom.xml`/estrutura de projeto para todos os katas, para que o script de coleta de métricas (Python) e o CK/PMD rodem sobre um layout previsível.
+- **CK: versão 0.7.0** (tag `ck-0.7.0`) — sem jar publicado em Releases, então é compilado a partir do código-fonte dentro do `Dockerfile` (`git clone --branch ck-0.7.0` + `mvn package`), gerando `/opt/ck/ck.jar`.
+- **PMD: versão 7.27.0** — distribuição binária oficial (`pmd-dist-7.27.0-bin.zip`), baixada e extraída para `/opt/pmd` no `Dockerfile`; o módulo usado é `pmd cpd` (duplicação de código).
+- Trocar a versão de CK ou PMD no meio do experimento invalidaria a comparação entre trials (mesmo motivo da seção acima) — mudanças exigem justificativa no relatório, como qualquer outra decisão desta seção.
 
 ### 1.1 Ambiente containerizado (Docker)
 
