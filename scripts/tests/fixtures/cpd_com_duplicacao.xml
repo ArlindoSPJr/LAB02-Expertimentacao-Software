@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd xmlns="https://pmd-code.org/schema/cpd-report"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://pmd-code.org/schema/cpd-report https://pmd-code.org/schema/cpd-report_1_0_0.xsd">
+  <duplication lines="12" tokens="60">
+    <file line="10" endline="21" path="/workspace/src/main/java/com/lab02/katas/A.java"/>
+    <file line="5" endline="16" path="/workspace/src/main/java/com/lab02/katas/B.java"/>
+    <codefragment><![CDATA[public void doSomething() { /* bloco duplicado */ }]]></codefragment>
+  </duplication>
+  <duplication lines="8" tokens="55">
+    <file line="1" endline="8" path="/workspace/src/main/java/com/lab02/katas/C.java"/>
+    <file line="20" endline="27" path="/workspace/src/main/java/com/lab02/katas/D.java"/>
+    <codefragment><![CDATA[public void doOther() { /* outro bloco duplicado */ }]]></codefragment>
+  </duplication>
+</pmd-cpd>
