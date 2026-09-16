@@ -1,8 +1,8 @@
 # Seleção e Validação das Katas
 
-Deliverable da issue **#3 — Selecionar e validar as 4 katas** (Passo 2 — Preparação do Experimento, `docs/enunciado.md`; papel do Integrante 1 na S01).
+Deliverable da issue **#3 — Selecionar e validar as katas** (Passo 2 — Preparação do Experimento, `docs/enunciado.md`; papel do Integrante 1 na S01). Katas 5 e 6 adicionadas posteriormente para expandir o desenho de 4 para 6 katas (ver justificativa na seção 1).
 
-Define os **objetos experimentais** do LAB02: os 4 exercícios (katas) resolvidos por cada integrante, metade com IA e metade sem. Registra *o que* é cada kata, *por que* foram escolhidos e *como* foram validados contra os critérios do enunciado.
+Define os **objetos experimentais** do LAB02: os 6 exercícios (katas) resolvidos por cada integrante, metade com IA e metade sem. Registra *o que* é cada kata, *por que* foram escolhidos e *como* foram validados contra os critérios do enunciado.
 
 > Estas especificações são a fonte da verdade para os templates de kata (`trials/<integrante>/<kata>/<tratamento>/`) e para os testes de aceitação JUnit 5. A matriz de tratamento/ordem e a lista de Issues da S02 ficam em `docs/hipoteses-e-metricas.md` e `docs/issues-planejadas.md`.
 
@@ -20,11 +20,11 @@ Define os **objetos experimentais** do LAB02: os 4 exercícios (katas) resolvido
 | C6 | Resolúvel **dentro do time-box de 35 min** no tratamento manual | Passo 3 |
 | C7 | Sem algoritmo "de concurso" (DP, grafos, geometria) — foco em **parsing + aplicação de regras + casos de borda** | Passo 1 (H), C2 |
 
-**Por que 4 e não 6:** 4 katas × 3 integrantes = 12 trials (6 com IA, 6 manual), suficiente para o Wilcoxon pareado; 6 katas × 2 tratamentos dentro de 35 min elevaria a fadiga (ameaça à validade) sem ganho estatístico dado o N fixo de 3 participantes.
+**Por que 6 (revisado de 4):** a proposta inicial fixava 4 katas (12 trials) para conter a fadiga do time-box. O grupo decidiu expandir para **6 katas × 3 integrantes = 18 trials (9 com IA, 9 manual)**, ainda um número par dividido exatamente pela metade por integrante (C1) e por todo o desenho, dando mais poder ao Wilcoxon pareado sem violar C6 — cada kata continua dimensionada para caber com folga no time-box de 35 min (§3). A fadiga (ameaça à validade) segue documentada em `docs/ameacas-validade.md`; mitigação recomendada é não rodar os 6 trials de um integrante em uma única sessão contínua.
 
 ## 2. Katas selecionados
 
-Todas têm a **mesma forma**: um único método `public static` puro (sem I/O, determinístico), entrada estruturada → saída estruturada, **8 testes de aceitação** (caminho feliz + bordas + entrada inválida). Solução de referência estimada em 30–55 LOC. As regras de negócio são **autorais do grupo** — não correspondem a nenhum exercício publicado.
+Todas têm a **mesma forma**: um único método `public static` puro (sem I/O, determinístico), entrada estruturada → saída estruturada, **8 testes de aceitação** (caminho feliz + bordas + entrada inválida). Solução de referência estimada em 25–55 LOC. As regras de negócio são **autorais do grupo** — não correspondem a nenhum exercício publicado.
 
 ### Kata 1 — Normalização e Deduplicação de Placas de Pátio
 
@@ -136,22 +136,73 @@ Todas têm a **mesma forma**: um único método `public static` puro (sem I/O, d
 
 ---
 
+### Kata 5 — Resumo de Chamados por Prioridade
+
+**Contexto.** Uma central de suporte registra chamados como linhas de texto `"PRIORIDADE:CODIGO"`. Consolidar quantos chamados válidos existem por prioridade.
+
+**Assinatura.** `List<String> ChamadoResumo.resumir(List<String> chamados)`
+
+**Regras (autorais).**
+1. Cada item válido tem o formato `"PRIORIDADE:CODIGO"`, com exatamente um separador `:`.
+2. `PRIORIDADE` é comparada sem diferenciar maiúsculas/minúsculas e normalizada para maiúsculas; deve ser uma de `ALTA`, `MEDIA`, `BAIXA`. Qualquer outro valor descarta a linha.
+3. `CODIGO` deve ser não vazio; se vazio, a linha é descartada.
+4. Linhas sem `:` ou com mais de um `:` são descartadas.
+5. Elemento `null` é ignorado.
+6. A saída é uma lista com uma entrada `"PRIORIDADE:contagem"` por prioridade que teve **pelo menos 1** chamado válido, na ordem fixa `ALTA`, `MEDIA`, `BAIXA` (prioridades com contagem zero não aparecem).
+
+**Testes de aceitação (8).**
+1. Lista vazia → lista vazia.
+2. Um chamado válido (`"ALTA:A1"`) → `["ALTA:1"]`.
+3. Mistura de prioridades → contagem por prioridade, `BAIXA` ausente por contagem zero.
+4. Mesma prioridade em cases diferentes (`"alta"`, `"ALTA"`, `"Alta"`) → agregada em uma única contagem.
+5. Prioridade desconhecida (`"URGENTE:X1"`) → descartada.
+6. Formato malformado (sem `:` ou com mais de um `:`) → descartado.
+7. `CODIGO` vazio (`"ALTA:"`) → descartado.
+8. Mistura completa de válidos, inválidos, `null` e todas as regras de descarte → contagem correta na ordem fixa.
+
+---
+
+### Kata 6 — Classificador de Senha de Cofre
+
+**Contexto.** Validar e classificar a força de uma senha alfanumérica segundo regras internas de composição.
+
+**Assinatura.** `String SenhaValidator.classificar(String senha)` — retorna `"FORTE"`, `"MEDIA"`, `"FRACA"` ou `"INVALIDA"`.
+
+**Regras (autorais).**
+1. `senha` `null`, ou comprimento fora de `[6, 12]`, ou contendo qualquer caractere que não seja letra (`a`-`z`, `A`-`Z`) ou dígito (`0`-`9`) → `"INVALIDA"`.
+2. Contar quantas das 3 classes de caractere estão presentes: minúscula, maiúscula, dígito (`classes` de 1 a 3).
+3. Verificar se existe repetição de caractere idêntico em posições **adjacentes** (case-sensitive).
+4. `score = max(1, classes − (1 se houver repetição adjacente, senão 0))`.
+5. `score == 3` → `"FORTE"`; `score == 2` → `"MEDIA"`; `score == 1` → `"FRACA"`.
+
+**Testes de aceitação (8).**
+1. `null` → `"INVALIDA"`.
+2. String vazia → `"INVALIDA"`.
+3. Senha curta (< 6 caracteres) → `"INVALIDA"`.
+4. Senha longa (> 12 caracteres) → `"INVALIDA"`.
+5. Caractere fora de letras/dígitos (ex.: `"!"`) → `"INVALIDA"`.
+6. 3 classes de caractere, sem repetição adjacente → `"FORTE"`.
+7. 3 classes de caractere, com repetição adjacente (rebaixa uma categoria) → `"MEDIA"`.
+8. Apenas 1 classe de caractere (só minúsculas) → `"FRACA"`.
+
+---
+
 ## 3. Validação dos critérios
 
 ### C2 — Dificuldade equivalente
 
-| Dimensão | Kata 1 | Kata 2 | Kata 3 | Kata 4 |
-|---|---|---|---|---|
-| Forma | 1 método `static` puro | 1 método `static` puro | 1 método `static` puro | 1 método `static` puro |
-| Entrada | `List<String>` | `int` | `int[]` + `int` | `String` |
-| Núcleo | normalização + dedup | faixas condicionais + aritmética | varredura linear com estado | parsing por posição + checksum |
-| Bordas exigidas | vazio, inválido, `null`, duplicata | zero, limites de faixa, teto, negativo | vazio, unitário, tol 0, negativo | `null`/vazio, cada classe de char, DV |
-| Nº de testes | 8 | 8 | 8 | 8 |
-| LOC de referência (est.) | ~45–55 | ~25–35 | ~35–45 | ~35–45 |
-| Algoritmo "de concurso"? | não | não | não | não |
-| Tempo manual estimado | 20–30 min | 12–20 min | 20–30 min | 20–30 min |
+| Dimensão | Kata 1 | Kata 2 | Kata 3 | Kata 4 | Kata 5 | Kata 6 |
+|---|---|---|---|---|---|---|
+| Forma | 1 método `static` puro | 1 método `static` puro | 1 método `static` puro | 1 método `static` puro | 1 método `static` puro | 1 método `static` puro |
+| Entrada | `List<String>` | `int` | `int[]` + `int` | `String` | `List<String>` | `String` |
+| Núcleo | normalização + dedup | faixas condicionais + aritmética | varredura linear com estado | parsing por posição + checksum | parsing de tokens + agrupamento/contagem | contagem de classes de caractere + adjacência |
+| Bordas exigidas | vazio, inválido, `null`, duplicata | zero, limites de faixa, teto, negativo | vazio, unitário, tol 0, negativo | `null`/vazio, cada classe de char, DV | `null`, formato malformado, código vazio, prioridade desconhecida | `null`/vazio, curta, longa, char inválido |
+| Nº de testes | 8 | 8 | 8 | 8 | 8 | 8 |
+| LOC de referência (est.) | ~45–55 | ~25–35 | ~35–45 | ~35–45 | ~30–40 | ~30–40 |
+| Algoritmo "de concurso"? | não | não | não | não | não | não |
+| Tempo manual estimado | 20–30 min | 12–20 min | 20–30 min | 20–30 min | 15–25 min | 15–25 min |
 
-Todas exigem o mesmo tipo de trabalho (ler entrada → aplicar regras autorais → tratar bordas), o mesmo número de testes e nenhum conhecimento algorítmico especializado. A Kata 2 é a mais curta; concentra lógica de faixas + teto + exceção para manter o tempo de raciocínio comparável. **Equivalência final a confirmar por piloto** (§4).
+Todas exigem o mesmo tipo de trabalho (ler entrada → aplicar regras autorais → tratar bordas), o mesmo número de testes e nenhum conhecimento algorítmico especializado. A Kata 2 é a mais curta; concentra lógica de faixas + teto + exceção para manter o tempo de raciocínio comparável. Katas 5 e 6 replicam o mesmo padrão de forma/complexidade das katas 1–4, com núcleos distintos (agrupamento por chave e composição de caracteres) para não sobrepor os núcleos já cobertos. **Equivalência final a confirmar por piloto** (§4).
 
 ### C3 — Baixa indexação
 
@@ -168,12 +219,12 @@ Todas exigem o mesmo tipo de trabalho (ler entrada → aplicar regras autorais �
 
 ## 4. Checklist de validação (S01)
 
-- [x] C1 — número par (4), divisível pela metade por tratamento.
-- [x] C2 — equivalência de forma/algoritmo/nº de testes documentada (§3).
-- [ ] C2 — **piloto**: um integrante resolve as 4 katas manualmente e registra o tempo; nenhuma deve estourar 35 min nem ficar abaixo de ~10 min.
+- [x] C1 — número par (6), divisível pela metade por tratamento (9 com-ia / 9 manual em 18 trials).
+- [x] C2 — equivalência de forma/algoritmo/nº de testes documentada (§3), incluindo katas 5 e 6.
+- [ ] C2 — **piloto**: um integrante resolve as 6 katas manualmente e registra o tempo; nenhuma deve estourar 35 min nem ficar abaixo de ~10 min.
 - [x] C3 — regras autorais, nenhuma kata clássica (§3).
-- [ ] C3 — **busca de indexação** executada (frases-chave dos 4 enunciados); resultado colado aqui.
-- [ ] C4 — 4 classes de teste JUnit 5 implementadas (8 casos cada) e rodando via `mvn test`.
+- [ ] C3 — **busca de indexação** executada (frases-chave dos 6 enunciados); resultado colado aqui.
+- [ ] C4 — 6 classes de teste JUnit 5 implementadas (8 casos cada) e rodando via `mvn test` — katas 1–4 ainda pendentes de execução real, katas 5–6 recém-adicionadas (ver `trials/`).
 - [x] C5 — Java (`docs/ambiente-experimento.md`).
 - [x] C6 — estimativas dentro do time-box (§3); confirmação depende do piloto.
 - [x] C7 — sem algoritmo de concurso.

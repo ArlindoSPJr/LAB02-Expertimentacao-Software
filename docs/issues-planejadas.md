@@ -15,35 +15,44 @@ Checklist de referência para criação das Issues no GitHub Projects, com respo
 
 ## S02 — Execução do Experimento + Coleta de Dados (Lab02S02)
 
-Uma Issue por kata/tratamento, atribuída a quem executa o trial. Cada integrante resolve os 6 katas (3 com IA, 3 sem, em ordem contrabalanceada entre integrantes — nenhum kata deve ter o mesmo tratamento para todos).
+Uma Issue por kata/tratamento, atribuída a quem executa o trial. Cada integrante resolve os 6 katas (3 com IA, 3 sem, em ordem contrabalanceada entre integrantes — nenhum kata tem o mesmo tratamento para todos). Katas e matriz de tratamento definidas em `docs/katas.md`; caminho do trial correspondente em `trials/<integrante>/<kata>/<tratamento>/`.
+
+**Matriz de tratamento por integrante**
+
+| Kata | Integrante 1 | Integrante 2 | Integrante 3 |
+|---|---|---|---|
+| Kata 1 — Placas | Com IA | Manual | Com IA |
+| Kata 2 — Bicicletário | Manual | Com IA | Manual |
+| Kata 3 — Sensor | Com IA | Manual | Manual |
+| Kata 4 — SKU | Manual | Com IA | Com IA |
+| Kata 5 — Chamados | Manual | Com IA | Manual |
+| Kata 6 — Senha | Com IA | Manual | Com IA |
 
 **Integrante 1**
-- [ ] `[Trial] Integrante 1 — Kata 1 (Palíndromo) — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 1 — Kata 2 (Contagem de Ocorrências de Caractere) — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 1 — Kata 3 (Contagem de Sequências Crescentes) — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 1 — Kata 4 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 1 — Kata 5 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 1 — Kata 6 — <Com IA|Manual>`
+- [ ] `[Trial] Integrante 1 — Kata 1 (Placas) — Com IA`
+- [ ] `[Trial] Integrante 1 — Kata 2 (Bicicletário) — Manual`
+- [ ] `[Trial] Integrante 1 — Kata 3 (Sensor) — Com IA`
+- [ ] `[Trial] Integrante 1 — Kata 4 (SKU) — Manual`
+- [ ] `[Trial] Integrante 1 — Kata 5 (Chamados) — Manual`
+- [ ] `[Trial] Integrante 1 — Kata 6 (Senha) — Com IA`
 
 **Integrante 2**
-- [ ] `[Trial] Integrante 2 — Kata 1 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 2 — Kata 2 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 2 — Kata 3 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 2 — Kata 4 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 2 — Kata 5 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 2 — Kata 6 — <Com IA|Manual>`
+- [ ] `[Trial] Integrante 2 — Kata 1 (Placas) — Manual`
+- [ ] `[Trial] Integrante 2 — Kata 2 (Bicicletário) — Com IA`
+- [ ] `[Trial] Integrante 2 — Kata 3 (Sensor) — Manual`
+- [ ] `[Trial] Integrante 2 — Kata 4 (SKU) — Com IA`
+- [ ] `[Trial] Integrante 2 — Kata 5 (Chamados) — Com IA`
+- [ ] `[Trial] Integrante 2 — Kata 6 (Senha) — Manual`
 
 **Integrante 3**
-- [ ] `[Trial] Integrante 3 — Kata 1 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 3 — Kata 2 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 3 — Kata 3 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 3 — Kata 4 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 3 — Kata 5 — <Com IA|Manual>`
-- [ ] `[Trial] Integrante 3 — Kata 6 — <Com IA|Manual>`
+- [ ] `[Trial] Integrante 3 — Kata 1 (Placas) — Com IA`
+- [ ] `[Trial] Integrante 3 — Kata 2 (Bicicletário) — Manual`
+- [ ] `[Trial] Integrante 3 — Kata 3 (Sensor) — Manual`
+- [ ] `[Trial] Integrante 3 — Kata 4 (SKU) — Com IA`
+- [ ] `[Trial] Integrante 3 — Kata 5 (Chamados) — Manual`
+- [ ] `[Trial] Integrante 3 — Kata 6 (Senha) — Com IA`
 
-> Preencher `<Com IA|Manual>` conforme a matriz de contrabalanceamento definida no Desenho do Experimento (S01), garantindo que cada kata seja resolvido com IA e sem IA por integrantes diferentes.
-
-Total: 18 Issues.
+Total: 18 Issues (9 Com IA, 9 Manual).
 
 ## S03 — Análise de Resultados + Dashboard (Lab02S03)
 
