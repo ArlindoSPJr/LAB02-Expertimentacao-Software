@@ -2,3 +2,6 @@ integrante,kata,tratamento,inicio_iso,fim_iso,tempo_segundos,censurado,testes_pa
 integrante-3,kata1-placas,com-ia,2026-09-16T23:31:06,2026-09-16T23:38:42,455.522,False,8,8
 integrante-3,kata4-sku,com-ia,2026-09-16T23:40:54,2026-09-16T23:41:07,13.655,False,8,8
 integrante-3,kata6-senha,com-ia,2026-09-16T23:39:27,2026-09-16T23:41:26,118.414,False,8,8
+integrante-3,kata3-sensor,manual,2026-09-17T00:09:34,2026-09-17T00:33:53,1458.594,False,8,8
+integrante-3,kata2-bicicletario,manual,2026-09-17T00:35:36,2026-09-17T00:47:12,696.234,False,8,8
+integrante-3,kata5-chamados,manual,2026-09-17T00:47:30,2026-09-17T01:13:22,1552.309,False,8,8
