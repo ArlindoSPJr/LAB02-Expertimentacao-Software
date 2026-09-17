@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import shutil
 import subprocess
 import sys
 import time
@@ -75,8 +76,9 @@ def _salvar_state(trial_dir: Path, state: TrialState) -> None:
 
 def _rodar_mvn_test(trial_dir: Path) -> None:
     """Roda `mvn test` no diretorio do trial. Falha de teste nao e erro do script."""
+    mvn = shutil.which("mvn") or "mvn"
     subprocess.run(
-        ["mvn", "-q", "-B", "test"],
+        [mvn, "-q", "-B", "test"],
         cwd=trial_dir,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
