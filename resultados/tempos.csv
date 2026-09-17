@@ -1,5 +1,4 @@
 integrante,kata,tratamento,inicio_iso,fim_iso,tempo_segundos,censurado,testes_passando,testes_total
-integrante-1,kata1-placas,com-ia,2026-09-17T15:47:02,2026-09-17T15:50:16,194.158,False,8,8
 integrante-3,kata1-placas,com-ia,2026-09-16T23:31:06,2026-09-16T23:38:42,455.522,False,8,8
 integrante-3,kata4-sku,com-ia,2026-09-16T23:40:54,2026-09-16T23:41:07,13.655,False,8,8
 integrante-3,kata6-senha,com-ia,2026-09-16T23:39:27,2026-09-16T23:41:26,118.414,False,8,8
@@ -12,3 +11,5 @@ integrante-2,kata5-chamados,com-ia,2026-09-17T14:15:36,2026-09-17T14:16:12,36.71
 integrante-2,kata1-placas,manual,2026-09-17T14:28:07,2026-09-17T14:48:50,1243.357,False,8,8
 integrante-2,kata3-sensor,manual,2026-09-17T14:50:27,2026-09-17T15:06:18,951.321,False,8,8
 integrante-2,kata6-senha,manual,2026-09-17T15:07:21,2026-09-17T15:32:55,1534.723,False,8,8
+integrante-1,kata1-placas,com-ia,2026-09-17T15:47:02,2026-09-17T15:50:16,194.158,False,8,8
+integrante-1,kata3-sensor,com-ia,2026-09-17T16:01:08,2026-09-17T16:01:50,41.762,False,8,8
