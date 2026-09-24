@@ -1,0 +1,3 @@
+tratamento,n,tempo_mediana_s,tempo_iqr_s,taxa_sucesso_mediana,taxa_sucesso_iqr,trials_censurados,wmc_mediana,wmc_iqr,loc_mediana,loc_iqr,wmc_por_loc_mediana,wmc_por_loc_iqr,pct_dup_mediana,pct_dup_iqr
+com-ia,9,40.676,84.327,1.0,0.0,0,10.0,11.0,42.0,21.0,0.3333333333333333,0.10644257703081234,0.0,0.0
+manual,9,1380.0,374.72299999999996,1.0,0.0,0,11.0,5.0,45.0,16.0,0.26666666666666666,0.03082437275985661,0.0,0.0
